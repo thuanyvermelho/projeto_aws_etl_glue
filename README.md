@@ -67,13 +67,15 @@ A arquitetura do projeto foi construída para ser escalável e integrar os dados
 ![alt text](prod/imagens/draioaws02.drawio.png)
 
 ### Componentes
-**Amazon IAM:** Gerenciamento de acesso e permissões para recursos AWS, garantindo segurança e controle de acesso apropriado.Crie as permissões necessárias para acesso aos serviços que iremos utlizar, depois cria uma chave e segredo e configure com AWS CLI.<br>
-**Amazon S3:** Usado para armazenar arquivos de dados brutos e arquivos de dados processados.<br>
-**AWS Glue Crawler:** Catalogação dos dados no Glue Data Catalog.<br>
-**AWS Glue Job:** Processa e transforma os dados.<br>
-**Amazon Athena:** Consulta os dados transformados.<br>
-**Amazon QuickSight:** Criação de dashboards interativos e relatórios.<br>
-**Amazon CloudWatch:** Monitoramento e logging das métricas e logs dos serviços, incluindo execução de Glue Jobs, desempenho e erros.<br>
+1-  **Amazon IAM:** Gerenciamento de acesso e permissões para recursos AWS, garantindo segurança e controle de acesso apropriado.Crie as permissões necessárias para acesso aos serviços que iremos utlizar, depois cria uma chave e segredo e configure com AWS CLI.<br>
+2-  **Amazon S3:** Usado para armazenar arquivos de dados brutos e arquivos de dados processados.<br>
+3- **AWS Lambda:** Executa funções de forma automática em resposta a eventos, como o carregamento de arquivos no S3. No contexto deste projeto, Lambda é usado para disparar o AWS Glue Job sempre que novos dados são carregados no S3.
+4-  **AWS Glue Crawler:** Catalogação dos dados no Glue Data Catalog.<br>
+5-  **AWS Glue Job:** Processa e transforma os dados.<br>
+6-  **Amazon Athena:** Permite realizar consultas nos dados processados, utilizando SQL diretamente sobre os dados armazenados no S3..<br>
+7-  **Amazon QuickSight:** Criação de dashboards interativos e relatórios.<br>
+8-  **Amazon CloudWatch:** Monitoramento e logging das métricas e logs dos serviços, incluindo execução de Glue Jobs, desempenho e erros.<br>
+9- **Usuários:** Os usuários com acesso podem acessar os dados diretamente via Athena e os usuários finais as visualizações através do QuickSight.
 
 ## Estrutura do Projeto 
 
