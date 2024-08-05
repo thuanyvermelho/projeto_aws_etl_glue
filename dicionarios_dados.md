@@ -1,69 +1,69 @@
-Dicionário de Dados
-Este documento descreve as colunas do dataset utilizado no projeto ETL da HealthTech.
+# Dicionário de Dados 
 
-Tabela: dados_cadastro
-Colunas
-id
+Este documento descreve as colunas do dataset utilizado no projeto ETL.
 
-Descrição: Identificador único do registro.
-Tipo de Dados: String (UUID)
-Exemplo: 123e4567-e89b-12d3-a456-426614174000
-cpf
+## Tabela: dados_cadastro
 
-Descrição: CPF do cliente.
-Tipo de Dados: String
-Exemplo: 123456789101
-nome_completo
+### Colunas
 
-Descrição: Nome completo do cliente.
-Tipo de Dados: String
-Exemplo: João da Silva
-convenio
+1. **id**
+   - **Descrição**: Identificador único do registro.
+   - **Tipo de Dados**: String (UUID)
+   - **Exemplo**: `123e4567-e89b-12d3-a456-426614174000`
 
-Descrição: Tipo de convênio do cliente.
-Tipo de Dados: String
-Exemplo: Plano A
-data_nascimento
+2. **cpf**
+   - **Descrição**: CPF do cliente.
+   - **Tipo de Dados**: String
+   - **Exemplo**: `123456789101`
 
-Descrição: Data de nascimento do cliente.
-Tipo de Dados: Date
-Formato: yyyy-MM-dd
-Exemplo: 1985-05-20
-sexo
+3. **nome_completo**
+   - **Descrição**: Nome completo do cliente.
+   - **Tipo de Dados**: String
+   - **Exemplo**: `João da Silva`
 
-Descrição: Sexo do cliente.
-Tipo de Dados: String
-Exemplo: M ou F
-logradouro
+4. **convenio**
+   - **Descrição**: Tipo de convênio do cliente.
+   - **Tipo de Dados**: String
+   - **Exemplo**: `Plano A`
 
-Descrição: Endereço do cliente.
-Tipo de Dados: String
-Exemplo: Rua das Flores
-numero
+5. **data_nascimento**
+   - **Descrição**: Data de nascimento do cliente.
+   - **Tipo de Dados**: Date
+   - **Formato**: `yyyy-MM-dd`
+   - **Exemplo**: `1985-05-20`
 
-Descrição: Número do endereço.
-Tipo de Dados: Integer
-Exemplo: 123
-bairro
+6. **sexo**
+   - **Descrição**: Sexo do cliente.
+   - **Tipo de Dados**: String
+   - **Exemplo**: `M` ou `F`
 
-Descrição: Bairro do cliente.
-Tipo de Dados: String
-Exemplo: Centro
-cidade
+7. **logradouro**
+   - **Descrição**: Endereço do cliente.
+   - **Tipo de Dados**: String
+   - **Exemplo**: `Rua das Flores`
 
-Descrição: Cidade do cliente.
-Tipo de Dados: String
-Exemplo: Sao Paulo
-estado
+8. **numero**
+   - **Descrição**: Número do endereço.
+   - **Tipo de Dados**: Integer
+   - **Exemplo**: `123`
 
-Descrição: Estado do cliente.
-Tipo de Dados: String
-Exemplo: SP
-data_cadastro
+9. **bairro**
+   - **Descrição**: Bairro do cliente.
+   - **Tipo de Dados**: String
+   - **Exemplo**: `Centro`
 
-Descrição: Data de cadastro do cliente.
-Tipo de Dados: Timestamp
-Formato: yyyy-MM-dd'T'HH:mm:ss
-Exemplo: 2023-01-15T10:30:00
-Observação Importante:
-Para garantir a conformidade com as melhores práticas da Lei Geral de Proteção de Dados (LGPD), os dados sensíveis foram criptografados durante os testes. Esta medida visa proteger a privacidade e segurança das informações tratadas.
+10. **cidade**
+    - **Descrição**: Cidade do cliente.
+    - **Tipo de Dados**: String
+    - **Exemplo**: `Sao Paulo`
+
+11. **estado**
+    - **Descrição**: Estado do cliente.
+    - **Tipo de Dados**: String
+    - **Exemplo**: `SP`
+
+12. **data_cadastro**
+    - **Descrição**: Data de cadastro do cliente.
+    - **Tipo de Dados**: Timestamp
+    - **Formato**: `yyyy-MM-dd'T'HH:mm:ss`
+    - **Exemplo**: `2023-01-15T10:30:00`
