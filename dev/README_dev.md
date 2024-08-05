@@ -4,24 +4,27 @@ No ambiente de testes unitário e de integração utiliza `pytest` para garantir
 ## Configuração de Testes Automatizados
 Os testes são definidos para verificar cada etapa do pipeline de dados, desde a leitura e transformação dos dados até a validação de qualidade e conformidade com regulamentos como a LGPD.
 
+[Script teste unitário ](/home/glue_user/workspace/dev/tests/test_unit.py)<br>
+[Script teste de integração ](/home/glue_user/workspace/dev/tests/test_integration.py)
+
 ## Estrutura dos Testes
 ### Configuração do Ambiente de Testes:
 
-Utilizei a biblioteca `pytest` para gerenciar os testes e `unittest.mock` para criar mocks dos métodos `getResolvedOptions` do AWS Glue, facilitando a execução de testes em um ambiente controlado.
-A função `spark_session` inicializa uma instância do `SparkSession` para permitir o processamento distribuído dos dados durante os testes.
+Utilizei a biblioteca `pytest` para gerenciar os testes e `unittest.mock` para criar mocks dos métodos `getResolvedOptions` do AWS Glue, facilitando a execução de testes em um ambiente controlado.<br>
+A função `spark_session` inicializa uma instância do `SparkSession` para permitir o processamento distribuído dos dados durante os testes.<br>
 O `GlueContext` é configurado a partir do SparkSession para simular o ambiente de execução do AWS Glue.
 
 ## Execução dos Testes:
 
-Os dados são lidos de arquivos de exemplo no formato Parquet, CSV e JSON armazenados no S3, representando diferentes fontes de dados.
-**Transformações e Padronizações:** Funções personalizadas como `transform_parquet`, `transform_csv` e `transform_json` são testadas para garantir que os dados sejam transformados corretamente.
+Os dados são lidos de arquivos de exemplo no formato Parquet, CSV e JSON armazenados no S3, representando diferentes fontes de dados.<br>
+**Transformações e Padronizações:** Funções personalizadas como `transform_parquet`, <`transform_csv` e `transform_json` são testadas para garantir que os dados sejam transformados corretamente.<br>
 **Otimização com Cache:** O DataFrame combinado é armazenado em cache para otimizar a performance durante os testes subsequentes, verificando se o cache é efetivamente utilizado.
 
 ### Validação de Dados:
 
-**Tratamento de Valores Nulos:** Funções são testadas para assegurar que valores nulos sejam tratados adequadamente.
-**Remoção de Duplicatas:** Testes confirmam que CPFs duplicados são corretamente removidos, mantendo apenas os registros mais recentes.
-**Qualidade e Conformidade dos Dados:** Inclui testes de qualidade de dados para verificar a integridade, verificar a conformidade com esquemas esperados e assegurar a criptografia de dados sensíveis.
+**Tratamento de Valores Nulos:** Funções são testadas para assegurar que valores nulos sejam tratados adequadamente.<br>
+**Remoção de Duplicatas:** Testes confirmam que CPFs duplicados são corretamente removidos, mantendo apenas os registros mais recentes.<br>
+**Qualidade e Conformidade dos Dados:** Inclui testes de qualidade de dados para verificar a integridade, verificar a conformidade com esquemas esperados e assegurar a criptografia de dados sensíveis.<br>
 
 ### Verificações de Segurança e Conformidade:
 
