@@ -4,7 +4,7 @@ Este pipeline de ETL é projetado para transformar e carregar dados de maneira e
 ## Carregamento dos Dados Brutos no S3
 Os dados brutos são carregados diariamente no bucket S3 chamado `cliente_data_raw`. É crucial qeu sejam carregados os 3 arquivos  para que o processo de ingestão funcione sem problemas. 
 
-![alt text](imagens/bucket_tratado.png)
+![alt text](imagens/bucket.png)
 
 ## Acionamento da Lambda
 Assim que todos os arquivos são carregados no S3, uma função Lambda `def_lambda.py`é automaticamente disparada. Essa função é responsável por iniciar o Glue Job que fará o processamento dos dados automatizado.
