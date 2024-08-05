@@ -4,8 +4,8 @@ No ambiente de testes unitário e de integração utiliza `pytest` para garantir
 ## Configuração de Testes Automatizados
 Os testes são definidos para verificar cada etapa do pipeline de dados, desde a leitura e transformação dos dados até a validação de qualidade e conformidade com regulamentos como a LGPD.
 
-[Script teste unitário ](/home/glue_user/workspace/dev/tests/test_unit.py)<br>
-[Script teste de integração ](/home/glue_user/workspace/dev/tests/test_integration.py)
+[Script teste unitário ](https://github.com/thuanyvermelho/projeto_aws_etl_glue/blob/master/dev/tests/test_unit.py)<br>
+[Script teste de integração ](https://github.com/thuanyvermelho/projeto_aws_etl_glue/blob/master/dev/tests/test_integration.py)
 
 ## Estrutura dos Testes
 ### Configuração do Ambiente de Testes:
