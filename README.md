@@ -64,7 +64,7 @@ Abra o VSCode e vá para View -> Command Palette (ou pressione Ctrl+Shift+P).
 ## Arquitetura do Projeto
 A arquitetura do projeto foi construída para ser escalável e integrar os dados de múltiplas fontes.
 
-![alt text](prod/imagens/draioaws02.drawio.png)
+![alt text](https://github.com/thuanyvermelho/projeto_aws_etl_glue/blob/ambiente_prod/prod/imagens/draioaws02.drawio.png)
 
 ### Componentes
 1-  **Amazon IAM:** Gerenciamento de acesso e permissões para recursos AWS, garantindo segurança e controle de acesso apropriado.Crie as permissões necessárias para acesso aos serviços que iremos utlizar, depois cria uma chave e segredo e configure com AWS CLI.<br>
@@ -98,9 +98,9 @@ No ambiente de desenvolvimento e testes, o fluxo de ETL é projetado para permit
 * **Testes de Integração:** Garantem que os diferentes componentes do sistema funcionem corretamente juntos, verificando o fluxo completo do pipeline de dados.
 Caso todos os testes passem, irá aparecer uma conforme abaixo:
 
-![alt text](dev/imagens/testes.png)
+![alt text](https://github.com/thuanyvermelho/projeto_aws_etl_glue/blob/ambiente_dev/dev/imagens/testes.png)
 
-O passo a passo do ambiente de testes. [documentação ambiente de testes](dev/README_dev.md).
+O passo a passo do ambiente de testes. [documentação ambiente de testes](https://github.com/thuanyvermelho/projeto_aws_etl_glue/tree/ambiente_dev).
 
 ## Ambiente de Produção
 No ambiente de produção, o foco é a automação e a escalabilidade, garantindo que o processamento de dados ocorra de forma eficiente e segura.
@@ -112,4 +112,4 @@ No ambiente de produção, o foco é a automação e a escalabilidade, garantind
 - **Glue Job** processa os dados e salva em Parquet.
 - **Athena** e QuickSight são usados para consultas e visualizações.
 
-O passo a passo completo do ambiente de produção. [documentação ambiente de produção](https://github.com/thuanyvermelho/projeto_aws_etl_glue/blob/master/prod/README_prod.md)
+O passo a passo completo do ambiente de produção. [documentação ambiente de produção](https://github.com/thuanyvermelho/projeto_aws_etl_glue/tree/ambiente_prod)
