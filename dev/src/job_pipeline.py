@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*- #
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import *
 from pyspark.sql.types import StringType, IntegerType, DateType, TimestampType, StructType, StructField
@@ -60,15 +61,11 @@ def validar_esquema(df, expected_schema):
 
 # Função para tratar valores nulos
 def tratar_valores_nulos(df):
-    for field in df.schema.fields:
-        if isinstance(field.dataType, StringType):
-            df = df.withColumn(field.name, when(col(field.name).isNull(), lit("N/A")).otherwise(col(field.name)))
-        elif isinstance(field.dataType, IntegerType):
-            df = df.withColumn(field.name, when(col(field.name).isNull(), lit(0)).otherwise(col(field.name)))
-        elif isinstance(field.dataType, DateType):
-            df = df.withColumn(field.name, when(col(field.name).isNull(), lit("1970-01-01").cast(DateType())).otherwise(col(field.name)))
-        elif isinstance(field.dataType, TimestampType):
-            df = df.withColumn(field.name, when(col(field.name).isNull(), lit("1970-01-01 00:00:00").cast(TimestampType())).otherwise(col(field.name)))
+    df = df.withColumn("nome_completo", when(col("nome_completo").isNull(), lit("N/A")).otherwise(col("nome_completo")))
+    df = df.withColumn("convenio", when(col("convenio").isNull(), lit("N/A")).otherwise(col("convenio")))
+    df = df.withColumn("numero", when(col("numero").isNull(), lit(0)).otherwise(col("numero")))
+    df = df.withColumn("data_nascimento", when(col("data_nascimento").isNull(), lit("1970-01-01").cast(DateType())).otherwise(col("data_nascimento")))
+    df = df.withColumn("data_cadastro", when(col("data_cadastro").isNull(), lit("1970-01-01 00:00:00").cast(TimestampType())).otherwise(col("data_cadastro")))
     return df
 
 # Remover CPFs duplicados e manter o registro com a data de cadastro mais recente
@@ -92,7 +89,7 @@ def validar_qualidade_dados(df):
         raise ValueError("O DataFrame está vazio. Nenhum registro encontrado.")
 
     # Verificar se a coluna 'cpf' não é nula, tem exatamente 11 caracteres, é uma string com dígitos e é única
-    df_cpf_invalido = df.filter(col("cpf").isNull() | (length(col("cpf")) != 11) | (~col("cpf").rlike(r"^\d{11}$")))
+    df_cpf_invalido = df.filter(col("cpf").isNull() | (length(col("cpf")) != 11) | (~col("cpf").rlike("^\d{11}$")))
     if df_cpf_invalido.count() > 0:
         raise ValueError(f"Existem {df_cpf_invalido.count()} registros com CPF nulo, com formato inválido ou que não são strings com 11 dígitos.")
 
@@ -104,8 +101,8 @@ def validar_qualidade_dados(df):
     print("Todos os registros estão válidos.")
 
 # Função para ler, transformar e padronizar dados do Parquet
-def transform_parquet(spark, file_path):
-    df_parquet = spark.read.parquet(file_path)
+def transform_parquet(spark, parquet_path):
+    df_parquet = spark.read.parquet(parquet_path)
     df_parquet_tratamento = df_parquet.alias("df_parquet_tratamento")
     df_transformado_parquet = df_parquet_tratamento.withColumnRenamed("documento_cpf", "cpf") \
                                     .withColumn("cpf", regexp_replace(col("cpf"), "[.-]", "")) \
@@ -126,8 +123,8 @@ def transform_parquet(spark, file_path):
     return df_transformado_parquet
 
 # Função para ler, transformar e padronizar dados do CSV
-def transform_csv(spark, file_path):
-    df_csv = spark.read.format("csv").option("header", "true").option("delimiter", "|").load(file_path)
+def transform_csv(spark, csv_path):
+    df_csv = spark.read.format("csv").option("header", "true").option("delimiter", "|").load(csv_path)
     df_csv_tratamento = df_csv.alias("df_csv_tratamento")
     df_transformado_csv = df_csv_tratamento.withColumn("nome", trim(regexp_replace(regexp_replace(col("nome"), "Sr\\.|Sra\\.|Dr\\.|Srta\\.|Dra\\.", ""), "\\s+", " "))) \
                                     .withColumnRenamed("nome", "nome_completo") \
@@ -147,8 +144,8 @@ def transform_csv(spark, file_path):
     return df_transformado_csv
 
 # Função para ler, transformar e padronizar dados do JSON
-def transform_json(spark, file_path):
-    df_json = spark.read.json(file_path)
+def transform_json(spark, json_path):
+    df_json = spark.read.json(json_path)
     df_json_tratamento = df_json.alias("df_json_tratamento")
     df_transformado_json = df_json_tratamento\
         .withColumn("nome", trim(regexp_replace(regexp_replace(col("nome"), "Sr\\.|Sra\\.|Dr\\.|Srta\\.|Dra\\.", ""), "\\s+", " ")))\
@@ -170,16 +167,17 @@ def transform_json(spark, file_path):
 # Função principal para executar o ETL
 def main():
     # Inicialização do contexto Glue e SparkSession
-    args = getResolvedOptions(sys.argv, ['JOB_NAME'])
+    args = getResolvedOptions(sys.argv, ['JOB_NAME','PARQUET_PATH', 'CSV_PATH', 'JSON_PATH', 'OUTPUT_PATH'])
     spark = SparkSession.builder.getOrCreate()
     glueContext = GlueContext(spark.sparkContext)
     job = Job(glueContext)
     job.init(args['JOB_NAME'], args)
 
-    # Caminhos dos arquivos
-    parquet_path = "s3://data-client-raw/upload/dados_cadastro_1.parquet"
-    csv_path = "s3://data-client-raw/upload/dados_cadastro_2.csv"
-    json_path = "s3://data-client-raw/upload/dados_cadastro_3.json"
+    # Caminhos dos arquivos de entrada
+    parquet_path = args['PARQUET_PATH']
+    csv_path = args['CSV_PATH']
+    json_path = args['JSON_PATH']
+
 
     # Transformar e padronizar dados
     df_transformado_parquet = transform_parquet(spark, parquet_path)
@@ -216,7 +214,7 @@ def main():
     tabela_unica = validar_esquema(tabela_unica, expected_schema)
 
     # Salvar o DataFrame resultante no S3 particionado por convenio
-    output_path = "s3://data-client-processed/output/dados_tratados"
+    output_path = args['OUTPUT_PATH']
     tabela_unica.write.partitionBy("convenio").parquet(output_path, mode="overwrite")
 
     # Finalizar o trabalho
