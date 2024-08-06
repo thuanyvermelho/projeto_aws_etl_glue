@@ -112,4 +112,4 @@ No ambiente de produção, o foco é a automação e a escalabilidade, garantind
 - **Glue Job** processa os dados e salva em Parquet.
 - **Athena** e QuickSight são usados para consultas e visualizações.
 
-O passo a passo completo do ambiente de produção. [documentação ambiente de produção](/home/glue_user/workspace/prod/README_prod.md).
+O passo a passo completo do ambiente de produção. [documentação ambiente de produção](https://github.com/thuanyvermelho/projeto_aws_etl_glue/blob/master/prod/README_prod.md)
