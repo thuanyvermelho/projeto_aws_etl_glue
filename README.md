@@ -42,7 +42,7 @@ pytest dev/tests/test_integration.py
 ```
 Isso vai verificar todas as funções importantes do pipeline de dados e apontar qualquer problema. Esses testes ajudam a garantir que o sistema esteja funcionando bem e que qualquer erro seja detectado cedo.
 
-![alt text](imagens/testes.png)
+![alt text](https://github.com/thuanyvermelho/projeto_aws_etl_glue/blob/ambiente_dev/dev/imagens/testes.png)
 
 ## Benefícios da Abordagem Customizada
 
