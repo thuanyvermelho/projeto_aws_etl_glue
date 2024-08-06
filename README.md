@@ -1,4 +1,4 @@
-# AWS - Projeto de Engenharia de Dados: ETL da HealthTech utilizando S3, Lambda, AWS Glue e Amazon Athena.
+# AWS - Projeto de Engenharia de Dados: ETL utilizando S3, Lambda, AWS Glue e Amazon Athena.
 
 Este repositório contém o código e a documentação para o projeto de ETL (Extract, Transform, Load) dos dados de uma empresa HealthTech. O projeto utiliza as ferramentas da AWS para a execução e gerenciamento dos recursos de dados. Os dados utilizados são ficticios.
 
