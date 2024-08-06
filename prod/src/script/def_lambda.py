@@ -6,8 +6,8 @@ def lambda_handler(event, context):
     glue_client = boto3.client('glue')
 
     # Nome do bucket e arquivos esperados
-    bucket_name = 'data-client-raw'
-    expected_files = ['upload/dados_cadastro_1.parquet', 'upload/dados_cadastro_2.csv', 'upload/dados_cadastro_3.json']
+    bucket_name = 'seu-bucket'
+    expected_files = ['upload/seu-arquivo.parquet', 'upload/seu-arquivo.csv', 'upload/seu-arquivo.json']
 
     # Lista os objetos no bucket na pasta especificada
     response = s3_client.list_objects_v2(Bucket=bucket_name, Prefix='upload/')

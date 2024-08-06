@@ -10,7 +10,12 @@ warnings.filterwarnings("ignore", category=FutureWarning, module='pyspark')
 
 # Mock do retorno de getResolvedOptions para fornecer JOB_NAME
 def mock_get_resolved_options(args, options):
-    return {'JOB_NAME': 'test_job'}
+    return {
+        'JOB_NAME': 'test_job',
+        'PARQUET_PATH': 'mock_parquet_path',
+        'CSV_PATH': 'mock_csv_path',
+        'JSON_PATH': 'mock_json_path'
+    }
 
 @pytest.fixture(scope="module")
 def spark_session():
@@ -40,10 +45,13 @@ def test_pipeline(glue_context):
         validar_qualidade_dados, validar_esquema, expected_schema
     )
 
-    # Caminhos para os arquivos de teste (ajustar conforme necessário)
-    parquet_path = "s3://data-client-raw/upload/dados_cadastro_1.parquet"
-    csv_path = "s3://data-client-raw/upload/dados_cadastro_2.csv"
-    json_path = "s3://data-client-raw/upload/dados_cadastro_3.json"
+    # Obtendo os argumentos do job
+    args = mock_get_resolved_options(None, None)
+    
+    # Caminhos para os arquivos de teste, agora são mockados e não expostos
+    parquet_path = args['PARQUET_PATH']
+    csv_path = args['CSV_PATH']
+    json_path = args['JSON_PATH']
     
     # Obter a sessão do Spark
     spark = glue_context.spark_session

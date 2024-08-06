@@ -23,7 +23,7 @@ O Glue Job faz a parte pesada do trabalho:
 
 Inicialmente, o pipeline lê dados de três formatos diferentes armazenados no S3. Cada formato (Parquet, CSV, JSON) é tratado por funções específicas (transform_parquet, transform_csv, transform_json) para garantir o processamento adequado. O script com o código da pipeline pode ser encontrado 
 
-[Script pipeline](https://github.com/thuanyvermelho/projeto_aws_etl_glue/blob/master/prod/src/script/job_client_health.py)
+[Script pipeline](/home/glue_user/workspace/prod/src/script/job_client_health.py)
 
 **Normalização de Texto:**
 A função `remove_accents_udf` é utilizada para remover acentos e normalizar textos, garantindo consistência nos dados textuais.
