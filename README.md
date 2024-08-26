@@ -70,7 +70,7 @@ A arquitetura do projeto foi construída para ser escalável e integrar os dados
 1-  **Amazon IAM:** Gerenciamento de acesso e permissões para recursos AWS, garantindo segurança e controle de acesso apropriado.Crie as permissões necessárias para acesso aos serviços que iremos utlizar, depois cria uma chave e segredo e configure com AWS CLI.<br>
 2-  **Amazon S3:** Usado para armazenar arquivos de dados brutos e arquivos de dados processados.<br>
 3- **AWS Lambda:** Executa funções de forma automática em resposta a eventos, como o carregamento de arquivos no S3. No contexto deste projeto, Lambda é usado para disparar o AWS Glue Job sempre que novos dados são carregados no S3.<br>
-4-  **AWS Glue Crawler:** Explora automaticamente os dados em suas fontes, infere os esquemas (estrutura dos dados) e cria as tabelas correspondentes no Glue Data Catalog
+4-  **AWS Glue Crawler:** Explora automaticamente os dados em suas fontes, infere os esquemas (estrutura dos dados) e cria as tabelas correspondentes no Glue Data Catalog.<br>
 5- **Glue Data Catalog:** Com base na análise dos dados, o Crawler cria ou atualiza as tabelas no Glue Data Catalog. Essas tabelas são então utilizadas pelos Glue Jobs para referenciar os dados durante o processo de ETL.<br>
 6-  **AWS Glue Job:** Processa e transforma os dados.<br>
 7-  **Amazon Athena:** Permite realizar consultas nos dados processados, utilizando SQL diretamente sobre os dados armazenados no S3..<br>
